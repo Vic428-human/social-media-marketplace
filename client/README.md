@@ -10,9 +10,16 @@ Currently, two official plugins are available:
 - [lucide-react](https://lucide.dev/guide/packages/lucide-react) 可定制的 SVG 庫，組件化使用，Tree-shaking，只打包實際導入的，减少bundle體積
 
 
-## React Compiler
+## 預計功能規劃
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- HOME page (2/4-2/8 預計)
+- market place  (2/4-2/8 預計)
+- profile details page (listing details page) (2/4-2/8 預計)
+- my listings (2/4-2/8 預計)
+- chat page
+- my orders page
+- admin dashboard
+
 
 ## Expanding the ESLint configuration
 
