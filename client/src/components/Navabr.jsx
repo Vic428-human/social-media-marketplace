@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate, Link } from "react-router-dom";
-import { MenuIcon, XIcon } from "lucide-react";
+import { BoxIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMore, XIcon } from "lucide-react";
 // useClerk() => allowing you to build alternatives to any Clerk Component. https://clerk.com/docs/react/reference/hooks/use-user
 // useUser() => This hook provides access to the current user's User object, https://clerk.com/docs/react/reference/hooks/use-clerk
 // UserButton => Shows the signed-in user's avatar. Selecting it opens a dropdown menu with account management options. https://clerk.com/docs/react/getting-started/quickstart#create-a-header-with-clerk-components
@@ -10,7 +10,7 @@ import { useUser, useClerk, UserButton } from "@clerk/clerk-react";
 const Navabr = () => {
   const { isSignedIn, user, isLoaded } = useUser();
   const clerk = useClerk();
-  console.log('user==>',user)
+  console.log("user==>", user);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -48,6 +48,7 @@ const Navabr = () => {
             >
               我的賣場
             </Link>
+
           </div>
           {!user ? (
             <div>
@@ -63,7 +64,41 @@ const Navabr = () => {
               />
             </div>
           ) : (
-            <UserButton/>
+            // https://clerk.com/docs/react/guides/customizing-clerk/adding-items/user-button
+            <UserButton>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="交易市集"
+                  labelIcon={<GripIcon />}
+                  size={16}
+                  onClick={() => navigate("/marketplace")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="聊天室"
+                  labelIcon={<MessageCircleMore />}
+                  size={16}
+                  onClick={() => navigate("/messages")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="我的賣場"
+                  labelIcon={<ListIcon />}
+                  size={16}
+                  onClick={() => navigate("/my-listings")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="我的訂單"
+                  labelIcon={<BoxIcon />}
+                  size={16}
+                  onClick={() => navigate("/my-orders")}
+                />
+              </UserButton.MenuItems>
+            </UserButton>
           )}
         </div>
         {/* Mobile Menu */}
@@ -80,16 +115,10 @@ const Navabr = () => {
             >
               交易市集
             </Link>
-            <Link
-              to="/messages"
-              onClick={clerk.openSignIn}
-            >
+            <Link to="/messages" onClick={clerk.openSignIn}>
               聊天室
             </Link>
-            <Link
-              to="/my-listings"
-              onClick={clerk.openSignIn}
-            >
+            <Link to="/my-listings" onClick={clerk.openSignIn}>
               我的賣場
             </Link>
 
