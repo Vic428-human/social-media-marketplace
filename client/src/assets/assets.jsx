@@ -1,9 +1,15 @@
 import logo from './logo.png';
 import { Youtube, Instagram, Music2, Facebook, Twitter, Linkedin, Pin, Camera, Gamepad2, MessageCircle } from 'lucide-react';
-import image_1 from './image_1.jpg';
-import image_2 from './image_2.jpg';
-import image_3 from './image_3.jpg';
-import image_4 from './image_4.jpg';
+import bannerFrame from './banner-frame.png';
+import emblem from './emblem.png';
+import emblem02 from './emblem02.png';
+import emblem03 from './emblem03.png';
+import emblem04 from './emblem04.png';
+import emblem05 from './emblem05.png';
+import emblem06 from './emblem06.png';
+import emblem07 from './emblem07.png';
+import emblem08 from './emblem08.png';
+
 import user_profile from './user_profile.png';
 import avatar01 from './avatar01.png';
 import avatar02 from './avatar02.png';
@@ -15,6 +21,15 @@ export const assets = {
     avatar01,
     avatar02,
     avatar03,
+    bannerFrame,
+    emblem,
+    emblem02,
+    emblem03,
+    emblem04,
+    emblem05,
+    emblem06,
+    emblem07,
+    emblem08,
 };
 
 export const socialMediaLinks = {

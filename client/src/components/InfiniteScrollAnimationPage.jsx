@@ -1,6 +1,6 @@
 function InfiniteScrollAnimationPage({ stocks }) {
   return (
-    <div className="overflow-hidden bg-black flex group">
+    <div className="overflow-hidden bg-white-50 flex group">
       <ul className="flex gap-10  text-white py-4 animate-infinite-scroll group-hover:[animation-play-state:paused]">
         {[...stocks, ...stocks].map(
           (
