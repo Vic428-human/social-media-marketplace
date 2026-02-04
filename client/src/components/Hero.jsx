@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets";
 const Hero = () => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
@@ -14,31 +14,33 @@ const Hero = () => {
       <div className="relative flex flex-col items-center justify-center text-sm px-4 md:px-16 lg:px-24 xl:px-40 text-gray-800">
         {/* Avatars + Stars */}
         <div className="flex items-center mt-24 md:mt-36">
-          <div className="flex -space-x-3 pr-3">
+          <div className="flex -space-x-0 pr-3">
             <img
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200"
-              alt="user3"
-              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[1]"
+              onClick={() => {
+                navigate("/");
+                scrollTo(0, 0);
+              }}
+              src={assets.avatar01}
+              alt="logo"
+              className="h-10 cursor-pointer"
             />
             <img
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=200"
-              alt="user1"
-              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-2"
+              onClick={() => {
+                navigate("/");
+                scrollTo(0, 0);
+              }}
+              src={assets.avatar02}
+              alt="logo"
+              className="h-10 cursor-pointer"
             />
             <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=200"
-              alt="user2"
-              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[3]"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200"
-              alt="user3"
-              className="size-8 object-cover rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[4]"
-            />
-            <img
-              src="https://randomuser.me/api/portraits/men/75.jpg"
-              alt="user5"
-              className="size-8 rounded-full border-2 border-white hover:-translate-y-0.5 transition z-[5]"
+              onClick={() => {
+                navigate("/");
+                scrollTo(0, 0);
+              }}
+              src={assets.avatar03}
+              alt="logo"
+              className="h-10 cursor-pointer"
             />
           </div>
 
@@ -58,37 +60,34 @@ const Hero = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="lucide lucide-star text-transparent fill-indigo-600"
+                    className="lucide lucide-star text-transparent fill-yellow-300"
                     aria-hidden="true"
                   >
                     <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
                   </svg>
                 ))}
             </div>
-            <p className="text-sm text-gray-700"> Used by 10,000+ users </p>
+            <p className="text-sm text-gray-700">
+              {" "}
+              獲得超過 10,000+ 玩家的一致好評
+            </p>
           </div>
         </div>
 
         {/* Headline */}
         <h1 className="text-4xl md:text-6xl font-semibold max-w-lg md:max-w-2xl text-center mt-4 leading-tight md:leading-tight">
-          Buy & Sell your{" "}
-          <span className="relative bg-gradient-to-r from-purple-700 to-[#764de1] bg-clip-text text-transparent">
-            Social
-            <div className="z-10 absolute bottom-0 left-0 w-full scale-120">
-              <img
-                src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/gradient_arc.svg"
-                alt="gradient"
-              />
-            </div>
-          </span>{" "}
-          <span className="relative bg-gradient-to-r from-[#764de1] to-indigo-600 bg-clip-text text-transparent">
-            Profiles
-          </span>{" "}
-          Online.
+          在{" "}
+          <span className="relative bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
+            RO樂園
+          </span>
+          <span className="relative bg-gradient-to-r from-cyan-500 to-[#22d3ee] bg-clip-text text-transparent">
+            買賣交易
+          </span>
+          裝備與道具平台
         </h1>
 
         <p className="max-w-xl text-center text-base my-7">
-          A secure marketplace to buy and sell your Instagram, Youtube and more - fast, safe and hassle-free.
+          安全可靠的交易平台，讓你快速、安心、零煩惱地買賣
         </p>
 
         {/* Search Box */}
@@ -101,12 +100,11 @@ const Hero = () => {
               onChange={(e) => setInput(e.target.value)}
               value={input}
               type="text"
-              placeholder="Instagram account"
+              placeholder="快速查詢"
               className="pl-2 flex-1 outline-none"
             />
-            <button className="bg-indigo-600 text-white p-3 px-6 rounded-md cursor-pointer">
-              {" "}
-              Search{" "}
+            <button className="bg-blue-600 hover:bg-blue-700 text-white p-3 px-6 rounded-md cursor-pointer transition-colors">
+              查詢
             </button>
           </label>
         </form>

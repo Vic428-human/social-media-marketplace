@@ -1,14 +1,20 @@
-import logo from './logo.svg';
+import logo from './logo.png';
 import { Youtube, Instagram, Music2, Facebook, Twitter, Linkedin, Pin, Camera, Gamepad2, MessageCircle } from 'lucide-react';
 import image_1 from './image_1.jpg';
 import image_2 from './image_2.jpg';
 import image_3 from './image_3.jpg';
 import image_4 from './image_4.jpg';
 import user_profile from './user_profile.png';
+import avatar01 from './avatar01.png';
+import avatar02 from './avatar02.png';
+import avatar03 from './avatar03.png';
 
 export const assets = {
     logo,
-    user_profile
+    user_profile,
+    avatar01,
+    avatar02,
+    avatar03,
 };
 
 export const socialMediaLinks = {

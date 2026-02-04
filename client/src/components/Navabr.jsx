@@ -9,7 +9,7 @@ import { useUser, useClerk, UserButton } from "@clerk/clerk-react";
 
 const Navabr = () => {
   const { isSignedIn, user, isLoaded } = useUser();
-  const clerk = useClerk()
+  const clerk = useClerk();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -25,26 +25,32 @@ const Navabr = () => {
             }}
             src={assets.logo}
             alt="logo"
-            className="h-10 cursor-pointer"
+            className="h-15 cursor-pointer"
           />
           {/* Desktop Menu */}
           <div className="hidden sm:flex items-center gap-4 md:gap-8 max-md:text-sm text-gray-800">
             <Link to="/" onClick={() => scrollTo(0, 0)}>
-              Home
+              首頁
             </Link>
             <Link to="/marketplace" onClick={() => scrollTo(0, 0)}>
-              Marketplace
+              交易市集
             </Link>
-            <Link to={user ? "/messages" : '#'} onClick={() => user ? scrollTo(0, 0) : clerk.openSignIn() }>
-              Messages
+            <Link
+              to={user ? "/messages" : "#"}
+              onClick={() => (user ? scrollTo(0, 0) : clerk.openSignIn())}
+            >
+              聊天室
             </Link>
-            <Link to={user ? "/my-listings" : '#'}  onClick={() => user ?  scrollTo(0, 0) : clerk.openSignIn()}>
-              MyListings
+            <Link
+              to={user ? "/my-listings" : "#"}
+              onClick={() => (user ? scrollTo(0, 0) : clerk.openSignIn())}
+            >
+              我的賣場
             </Link>
           </div>
 
           <div>
-            <button className="max-sm:hidden cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
+            <button className="max-sm:hidden cursor-pointer px-8 py-2 bg-blue-600 hover:bg-blue-700 transition text-white rounded-full font-medium shadow-md">
               Login
             </button>
             <MenuIcon
@@ -59,25 +65,25 @@ const Navabr = () => {
         >
           <div className="flex flex-col items-center justify-center h-full text-xl font-semibold gap-6 p-4">
             <Link to="/" onClick={() => setMenuOpen(false) && scrollTo(0, 0)}>
-              Home
+              首頁
             </Link>
             <Link
               to="/marketplace"
               onClick={() => setMenuOpen(false) && scrollTo(0, 0)}
             >
-              Marketplace
+              交易市集
             </Link>
             <Link
               to="/messages"
               onClick={() => setMenuOpen(false) && scrollTo(0, 0)}
             >
-              Messages
+              聊天室
             </Link>
             <Link
               to="/my-listings"
               onClick={() => setMenuOpen(false) && scrollTo(0, 0)}
             >
-              MyListings
+              我的賣場
             </Link>
 
             <button className=" cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-indigo-600 transition text-white rounded-full">
