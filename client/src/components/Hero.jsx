@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useUser, } from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 const Hero = () => {
   const { user } = useUser();
   const [input, setInput] = useState("");
@@ -16,15 +16,18 @@ const Hero = () => {
         {/* Avatars + Stars */}
         <div className="flex items-center mt-24 md:mt-36">
           <div className="flex -space-x-0 pr-3">
-            <img
-              onClick={() => {
-                navigate("/");
-                scrollTo(0, 0);
-              }}
-              src={user.imageUrl}
-              alt="自己的頭像"
-              className="h-10 cursor-pointer"
-            />
+            {user && (
+              <img
+                onClick={() => {
+                  navigate("/");
+                  scrollTo(0, 0);
+                }}
+                src={user.imageUrl}
+                alt="自己的頭像"
+                className="h-10 cursor-pointer"
+              />
+            )}
+
             <img
               onClick={() => {
                 navigate("/");
@@ -80,6 +83,12 @@ const Hero = () => {
           在{" "}
           <span className="relative bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent">
             RO樂園
+            <div className="z-10 absolute bottom-0 left-0 w-full scale-120">
+              <img
+                src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/gradient_arc.svg"
+                alt="gradient"
+              />
+            </div>
           </span>
           <span className="relative bg-gradient-to-r from-cyan-500 to-[#22d3ee] bg-clip-text text-transparent">
             買賣交易
