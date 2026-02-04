@@ -1,21 +1,23 @@
 import React from "react";
-import { platformIcons } from "../utils/platformIcons";
-import { BadgeCheck } from "lucide-react";
+import { platformIcons } from "../assets/assets";
+import { BadgeCheck, View, CircleDollarSign, MapPin } from "lucide-react";
 
 const ListingCard = ({ listing }) => {
   const currency = import.meta.env.VITE_CURRENCY || "$";
   return (
-    <div className="relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transaction">
-      {/* feature banner  */}
-      {listing.featured && (
+    <div className="flex relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transaction">
+      {/* 推薦tag  */}
+      {listing.featured ? (
         <>
-          <p className="py-1" />
-          <div className="absolute top-0 left-0 w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-center text-xs font-semibold py-1 tracking-wide uppercase">
+          <div className="flex items-center justify-center w-[50px] px-1 bg-gradient-to-r from-pink-500 to-purple-500 border-r-2 text-center">
             推薦
           </div>
         </>
+      ) : (
+        <div className="flex items-center justify-center w-[50px] px-1 border-r-0 text-center" />
       )}
-      <div className="p-5 pt-8">
+      {/* 推薦tag的右半邊 */}
+      <div className="p-5 pt-8 w-[100%]">
         {/* header */}
         <div className="flex items-center gap-3 mb-3">
           {platformIcons[listing.platform]}
@@ -23,12 +25,58 @@ const ListingCard = ({ listing }) => {
             <h2>{listing.title}</h2>
             <p className="text-sm text-gray-500">
               @{listing.username} -{" "}
-              <span className="capitalize">{listing.platform}</span>
+              <span className="capitalize">{listing.game}</span>
             </p>
           </div>
           {listing.verified && (
             <BadgeCheck className="text-green-500 ml-auto w-5" />
           )}
+        </div>
+        {/* stats */}
+        <div className="flex items-center gap-10 max-w-lg">
+          <div className="flex items-center text-sm text-gray-400">
+            <View className="size-6 mr-1 text-gray-400" />
+            <span className="text-lg font-medium text-slate-800 mr-1.5">
+              {listing.views.toLocaleString()}
+            </span>{" "}
+            次
+          </div>
+
+          {listing.price && (
+            <div className="flex items-center text-sm text-gray-400">
+              <CircleDollarSign className="size-6 mr-1 text-amber-300" />
+              <span className="text-lg font-medium text-slate-800 mr-1.5">
+                {listing.price}
+              </span>
+            </div>
+          )}
+        </div>
+        {/* tags and location */}
+        <div className="flex items-center gap-3 mt-1">
+          <span className="text-xs font-medium bg-pink-100 text-pink-600 px-3 py-1 rounded-full capitalize">
+            來源
+          </span>
+          {listing.country && (
+            <div className="flex items-center text-gray-500 text-sm">
+              <MapPin className="size-6 mr-1 text-gray-400" />
+              {listing.country}
+            </div>
+          )}
+        </div>
+        <p className="text-sm text-gray-600 mb-4 mt-2 line-clamp-2">
+          {listing.description}
+        </p>
+        <hr className="my-5 border-gray-200 w-full" />
+        {/* footer */}
+        <div className="flex items-center justify-between">
+           <div className="flex flex-col">
+            <p className="text-sm text-green-400 font-bold">創建時間</p>
+            <span> {listing.createdAt}</span>
+          </div>
+          <div className="flex flex-col">
+            <p className="text-sm text-blue-600 font-bold">更新時間</p>
+            <span> {listing.updatedAt}</span>
+          </div>
         </div>
       </div>
     </div>
