@@ -5,6 +5,9 @@ import Plans from "../components/Plans";
 import InfiniteScrollAnimationPage from "../components/InfiniteScrollAnimationPage";
 import { assets } from "../assets/assets";
 import {motion} from "framer-motion";
+import CTA from "../components/CTA";
+
+const MotionDiv = motion.div;
 
 const stocksData = [
   { id: 1, territory: "維爾茨堡", guild: "土匪" },
@@ -35,7 +38,7 @@ const Home = () => {
           <div className="flex-1 flex flex-col items-center mt-5">
             <div className="overflow-hidden text-white flex items-center">
               {/* 公會廣告刊登預期放五個 */}
-              <motion.div
+              <MotionDiv
                 className="flex flex-col gap-2.5"
                 animate={{ y: ["0%", "-50%"] }} // 往上移動一半高度
                 transition={{
@@ -104,7 +107,7 @@ const Home = () => {
                     draggable="false"
                   />
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
           </div>
           {/*正中間*/}
@@ -191,6 +194,7 @@ const Home = () => {
           </div>
         </div>
         <Plans />
+        <CTA/>
       </div>
     </>
   );
