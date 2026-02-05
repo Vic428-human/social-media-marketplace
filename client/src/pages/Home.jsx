@@ -27,7 +27,6 @@ const stocksData = [
 const leftBanners = bannerItems.filter((item) => item.side === "left");
 const rightBanners = bannerItems.filter((item) => item.side === "right");
 
-
 const Home = () => {
   const [stocks] = useState(stocksData);
 
@@ -37,7 +36,7 @@ const Home = () => {
         <InfiniteScrollAnimationPage stocks={stocks} />
         <div className="flex">
           {/* 左半邊 */}
-          <div className="flex-1 flex flex-col items-center mt-5">
+          <div className="flex-1 flex flex-col items-center max-md:hidden">
             <div className="overflow-hidden text-white flex items-center">
               <MotionDiv
                 className="flex flex-col gap-2.5"
@@ -72,9 +71,13 @@ const Home = () => {
           <div className="flex-1.5 flex flex-col items-center">
             <Hero />
             <LatestListing />
+            <div className="">
+              <Plans />
+            </div>
+            <CTA />
           </div>
           {/* 右半邊 */}
-          <div className="flex-1 flex flex-col items-center">
+          <div className="flex-1 flex flex-col items-center max-md:hidden">
             <div className="overflow-hidden text-white flex items-center">
               <MotionDiv
                 className="flex flex-col gap-2.5"
@@ -106,8 +109,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <Plans />
-        <CTA />
       </div>
     </>
   );
