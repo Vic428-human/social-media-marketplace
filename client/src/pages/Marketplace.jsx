@@ -3,6 +3,7 @@ import { ArrowLeftIcon, FilterIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ListingCard from "../components/ListingCard";
+import FilterSiderbar from "../components/FilterSiderbar";
 
 const Marketplace = () => {
   const navigator = useNavigate();
@@ -75,7 +76,7 @@ const Marketplace = () => {
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-24 xl:px-32">
       {/* 超稀有卡片區 */}
-      <div className="mt-8 w-full h-[300px] text-center fixed top-[5%] z-50">
+      <div className="hidden md:block  mt-8 w-full h-[300px] text-center fixed top-[5%] z-50">
         <div
           className="banner-slider absolute w-[75px] h-[100px] top-[15%] left-[calc(50%-100px)]
                    [transform-style:preserve-3d] [transform:perspective(1000px)]"
@@ -103,7 +104,7 @@ const Marketplace = () => {
         </div>
       </div>
       {/* 上半段 */}
-      <div className="mt-24 flex items-center justify-between text-slate-500">
+      <div className="flex items-center justify-between text-slate-500">
         <button
           onClick={() => {
             navigator("/");
@@ -117,7 +118,6 @@ const Marketplace = () => {
         <button
           onClick={() => {
             setShowFilter(true);
-            navigator("/");
             scrollTo(0, 0);
           }}
           className="flex sm:hidden items-center gap-2 py-4"
@@ -129,7 +129,13 @@ const Marketplace = () => {
 
       {/* 下半段 左邊篩選內容 + 右邊展示產品 */}
       <div className="relative flex items-start justify-between gap-8 pb-8 ">
-        <div className="hidden sm:block">篩選器</div>
+        <FilterSiderbar
+          showFilter={showFilter}
+          setShowFilter={setShowFilter}
+          filters={filters}
+          setFilters={setFilters}
+        />
+
         <div className="flex-1 grid xl:grid-cols-2 gap-4">
           {/* 有認證過的帳號擺最前面 */}
           {sortedListings.map((listing, index) => (
