@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeftIcon, FilterIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -7,7 +7,14 @@ import ListingCard from "../components/ListingCard";
 const Marketplace = () => {
   const navigator = useNavigate();
   const { listings } = useSelector((state) => state.listing);
-  const [showFilter, setShowFilter] = React.useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filters, setFilters] = useState({
+    platform: null,
+    maxPrice: 100000,
+    minPrice: 0,
+    verified: false,
+    featured: false,
+  });
 
   const quantity = 10;
 
@@ -68,7 +75,7 @@ const Marketplace = () => {
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-24 xl:px-32">
       {/* 超稀有卡片區 */}
-      <div className="w-full h-[300px] text-center overflow-hidden relative">
+      <div className="mt-8 w-full h-[300px] text-center fixed top-[5%] z-50">
         <div
           className="banner-slider absolute w-[75px] h-[100px] top-[15%] left-[calc(50%-100px)]
                    [transform-style:preserve-3d] [transform:perspective(1000px)]"
@@ -80,6 +87,11 @@ const Marketplace = () => {
               className="absolute inset-0
                        [transform:rotateY(calc((var(--position)-1)*(360deg/var(--quantity))))_translateZ(550px)]"
               style={{ ["--position"]: it.position }}
+              title={it.alt}
+              onClick={() => {
+                navigator(`/auctions/${it.alt}`, { state: { alt: it.alt } });
+                scrollTo(0, 0);
+              }}
             >
               <img
                 className="w-full h-full object-cover"
@@ -91,7 +103,7 @@ const Marketplace = () => {
         </div>
       </div>
       {/* 上半段 */}
-      <div className="-mt-24 flex items-center justify-between text-slate-500">
+      <div className="mt-24 flex items-center justify-between text-slate-500">
         <button
           onClick={() => {
             navigator("/");
@@ -116,8 +128,8 @@ const Marketplace = () => {
       </div>
 
       {/* 下半段 左邊篩選內容 + 右邊展示產品 */}
-      <div className="relative flex items-start justify-between gap-8 pb-8">
-        <div className="hidden sm:block flex-1">篩選器</div>
+      <div className="relative flex items-start justify-between gap-8 pb-8 ">
+        <div className="hidden sm:block">篩選器</div>
         <div className="flex-1 grid xl:grid-cols-2 gap-4">
           {/* 有認證過的帳號擺最前面 */}
           {sortedListings.map((listing, index) => (

@@ -45,6 +45,9 @@
   animation: marqueeScrollY 25s linear infinite;
 }
 
+/* ------------------- */
+.banner-slider:hover { animation-play-state: paused; }
+
 .banner-slider {
   animation: autoRun 20s linear infinite;
 }

@@ -9,6 +9,7 @@ import MyOrders from "./pages/MyOrders";
 import Loading from "./pages/Loading";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navabr from "./components/Navabr";
+import Aution from "./pages/Aution";
 
 const App = () => {
   const {pathname} = useLocation(); 
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/my-listings" element={<MyListings />} />
         <Route path="/listing/:listingId" element={<ListingDetails />} />
+        <Route path="/auctions/:autionId" element={<Aution />} />
         <Route path="/crate-listing" element={<ManageListing />} />
         <Route path="/edit-listing/:id" element={<ManageListing />} />
         <Route path="/messages" element={<Messages />} />

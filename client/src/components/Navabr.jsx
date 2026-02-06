@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate, Link } from "react-router-dom";
-import { BoxIcon, GripIcon, ListIcon, MenuIcon, MessageCircleMore, XIcon } from "lucide-react";
+import {
+  BoxIcon,
+  GripIcon,
+  ListIcon,
+  MenuIcon,
+  MessageCircleMore,
+  XIcon,
+} from "lucide-react";
 // useClerk() => allowing you to build alternatives to any Clerk Component. https://clerk.com/docs/react/reference/hooks/use-user
 // useUser() => This hook provides access to the current user's User object, https://clerk.com/docs/react/reference/hooks/use-clerk
 // UserButton => Shows the signed-in user's avatar. Selecting it opens a dropdown menu with account management options. https://clerk.com/docs/react/getting-started/quickstart#create-a-header-with-clerk-components
@@ -35,6 +42,12 @@ const Navabr = () => {
             <Link to="/marketplace" onClick={() => scrollTo(0, 0)}>
               交易市集
             </Link>
+             <Link
+              to={user ? "/auctions/default" : "#"}
+              onClick={() => (user ? scrollTo(0, 0) : clerk.openSignIn())}
+            >
+              競拍區
+            </Link>
             <Link
               to={user ? "/messages" : "#"}
               onClick={() => (user ? scrollTo(0, 0) : clerk.openSignIn())}
@@ -47,7 +60,6 @@ const Navabr = () => {
             >
               我的賣場
             </Link>
-
           </div>
           {!user ? (
             <div>
@@ -71,6 +83,14 @@ const Navabr = () => {
                   labelIcon={<GripIcon />}
                   size={16}
                   onClick={() => navigate("/marketplace")}
+                />
+              </UserButton.MenuItems>
+              <UserButton.MenuItems>
+                <UserButton.Action
+                  label="競拍區"
+                  labelIcon={<ListIcon />}
+                  size={16}
+                  onClick={() => navigate("/my-listings")}
                 />
               </UserButton.MenuItems>
               <UserButton.MenuItems>
