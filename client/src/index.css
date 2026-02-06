@@ -45,6 +45,18 @@
   animation: marqueeScrollY 25s linear infinite;
 }
 
+.banner-slider {
+  animation: autoRun 20s linear infinite;
+}
+
+@keyframes autoRun {
+  from {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
 /* 用 @apply 就能抽成一個語意清楚的 class */
 /* <button>送出</button> => 所有 button tag 都 apply cursor-pointer 這個效果，也可以應用在classname*/
 button {
