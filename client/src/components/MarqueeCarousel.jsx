@@ -93,34 +93,6 @@ const MarqueeCarousel = ({ type, bannerData, style, direction }) => {
         {/* 下方漸層遮罩 */}
         <div className="absolute left-0 bottom-0 w-full h-14 z-10 pointer-events-none bg-gradient-to-t from-white to-transparent dark:from-gray-900" />
       </div>
-
-      <style jsx>{`
-        @keyframes marqueeScrollX {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .marquee-inner-horizontal {
-          animation: marqueeScrollX 25s linear infinite;
-        }
-
-        @keyframes marqueeScrollY {
-          0% {
-            transform: translateY(0%);
-          }
-          100% {
-            transform: translateY(-50%);
-          }
-        }
-
-        .marquee-inner-vertical {
-          animation: marqueeScrollY 25s linear infinite;
-        }
-      `}</style>
     </div>
   );
 };

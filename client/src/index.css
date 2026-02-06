@@ -19,6 +19,32 @@
   }
 }
 
+@keyframes marqueeScrollX {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-inner-horizontal {
+  animation: marqueeScrollX 25s linear infinite;
+}
+
+@keyframes marqueeScrollY {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.marquee-inner-vertical {
+  animation: marqueeScrollY 25s linear infinite;
+}
+
 /* 用 @apply 就能抽成一個語意清楚的 class */
 /* <button>送出</button> => 所有 button tag 都 apply cursor-pointer 這個效果，也可以應用在classname*/
 button {
