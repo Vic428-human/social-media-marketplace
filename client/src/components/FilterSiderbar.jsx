@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { ChevronDown, Filter, X } from "lucide-react";
+import { ChevronDown, Currency, Filter, X } from "lucide-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const FilterSiderbar = ({ showFilter, setShowFilter, filters, setFilters }) => {
+  const currency = import.meta.env.VITE_CURRENCY || "$";
+
   const navigator = useNavigate();
   const [expandSections, setExpandSections] = useState({
     platform: true,
-    maxPrice: true,
-    minPrice: true,
+    price: true,
     verified: false,
     featured: false,
   });
@@ -29,9 +30,8 @@ const FilterSiderbar = ({ showFilter, setShowFilter, filters, setFilters }) => {
     setExpandSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-
   const onFiltersChange = (newFilters) => {
-    // 拿更新後的內容覆蓋當前state的狀態
+    // 拿 更新後 的內容覆蓋當前state的狀態
     setFilters({ ...filters, ...newFilters });
   };
 
@@ -74,45 +74,102 @@ const FilterSiderbar = ({ showFilter, setShowFilter, filters, setFilters }) => {
             value={search}
           />
         </div>
-
         {/* platform filter */}
-        <button
-          onClick={() => toggleSection("platform")}
-          className="flex items-center justify-between w-full mb-3"
-        >
-          <label>平台</label>
-          <ChevronDown
-            className={`size-4 transition-transform ${expandSections.platform ? "rotate-180" : ""}`}
-          />
-        </button>
+        <div>
+          <button
+            onClick={() => toggleSection("platform")}
+            className="flex items-center justify-between w-full mb-3"
+          >
+            <label className="text-sm font-medium text-gray-800">平台</label>
+            <ChevronDown
+              className={`size-4 transition-transform ${expandSections.platform ? "rotate-180" : ""}`}
+            />
+          </button>
 
-        {/* platform checkboxs list*/}
-        {expandSections.platform && (
-          <div className="grid grid-cols-2 gap-2">
-            {platforms.map((platform) => (
-              <label
-                key={platform.value}
-                className="flex items-center gap-2 text-gray-700 text-sm"
+          {/* platform checkboxs list*/}
+          {expandSections.platform && (
+            <div className="grid grid-cols-2 gap-2">
+              {platforms.map((platform) => (
+                <label
+                  key={platform.value}
+                  className="flex items-center gap-2 text-gray-700 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    // id={platform.value}
+                    checked={
+                      filters.platform?.includes(platform.value) || false
+                    }
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      const current = filters.platform || [];
+                      // 當下打勾 => 加進陣列裡 , 當下取消打勾 => 從陣列裡刪掉
+                      const updated = checked
+                        ? [...current, platform.value]
+                        : current.filter((p) => p !== platform.value);
+
+                      // 先前內容 + 修改特定屬性 (ex: platform) => 所以傳進去的 newFilters 就是更新後的內容，再透過 setState hook 更新畫面
+                      onFiltersChange({
+                        ...filters,
+                        platform: updated.length > 0 ? updated : null,
+                      });
+                    }}
+                  />
+                  <span> {platform.label} </span>
+                </label>
+              ))}
+            </div>
+          )}
+        </div>
+        {/* price range  */}
+        <div>
+          <button
+            onClick={() => toggleSection("price")}
+            className="flex items-center justify-between w-full mb-3"
+          >
+            <label lassName="text-sm font-medium text-gray-800">價格</label>
+            <ChevronDown
+              className={`size-4 transition-transform ${expandSections.price ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {/* 價格區間 */}
+          {expandSections.price && (
+            <div className="space-y-3 relative">
+              {/* 數字泡泡 */}
+              <div
+                className="absolute z-1000 max-w-[200px] text-sm font-medium text-white bg-amber-600 px-3 py-1 rounded-md shadow-md pointer-events-none -translate-x-1/2 transition-all duration-100"
+                // 讓泡泡（tooltip）跟著滑塊移動。
+                style={{
+                  left: `calc(${(Number(filters.maxPrice || 100000) / 100000) * 100}% )`,
+                  transform: 'translateX(-75%)', 
+                  bottom: `40px`
+                }}
               >
-                <input
-                  type="checkbox"
-                  // id={platform.value}
-                  checked={filters.platform?.includes(platform.value) || false}
-                  onChange={(e)=>{
-                    const checked = e.target.checked;
-                    const current = filters.platform || [];
-                    // 當下打勾 => 加進陣列裡 , 當下取消打勾 => 從陣列裡刪掉
-                    const updated = checked ? [...current, platform.value] : current.filter((p)=> p !== platform.value);
-
-                    // 先前內容 + 修改特定屬性 (ex: platform) => 所以傳進去的 newFilters 就是更新後的內容，再透過 setState hook 更新畫面
-                    onFiltersChange({ ...filters,  platform: updated.length > 0 ? updated : null });
-                  }}
-                />
-                <span> {platform.label} </span>
-              </label>
-            ))}
-          </div>
-        )}
+                NT$ {(filters.maxPrice || 100000).toLocaleString()}
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="100000"
+                step="100"
+                // 當前狀態
+                value={filters.maxPrice || 100000}
+                onChange={(e) =>
+                  onFiltersChange({
+                    ...filters,
+                    maxPrice: parseInt(e.target.value),
+                  })
+                }
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-auto cursor-pointer accent-amber-400"
+              />
+              <div className="flex items-center justify-between text-sm text-gray-600">
+                <span>{currency} 0</span>
+                <span>{currency} 100,000</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

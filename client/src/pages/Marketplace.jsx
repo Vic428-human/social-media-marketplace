@@ -9,6 +9,7 @@ const Marketplace = () => {
   const navigator = useNavigate();
   const { listings } = useSelector((state) => state.listing);
   const [showFilter, setShowFilter] = useState(false);
+  // 當前狀態，若有新的變化，也是在這更新
   const [filters, setFilters] = useState({
     platform: null,
     maxPrice: 100000,
