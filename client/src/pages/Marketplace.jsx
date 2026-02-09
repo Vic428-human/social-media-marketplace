@@ -8,7 +8,11 @@ import FilterSiderbar from "../components/FilterSiderbar";
 const Marketplace = () => {
   const navigator = useNavigate();
   const { listings } = useSelector((state) => state.listing);
+  // 最愛陣列：存字串名稱
+  const [favoriteNames, setFavoriteNames] = useState([]);
+  console.log(favoriteNames);
   const [showFilter, setShowFilter] = useState(false);
+
   // 當前狀態，若有新的變化，也是在這更新
   const [filters, setFilters] = useState({
     platform: null,
@@ -17,7 +21,6 @@ const Marketplace = () => {
     verified: false,
     featured: false,
   });
-  console.log('filters===>', filters)
   const quantity = 10;
 
   const items = [
@@ -74,6 +77,18 @@ const Marketplace = () => {
   ];
   // 認證過的優先顯示
   const sortedListings = [...listings].sort((a, b) => b.verified - a.verified);
+
+  // 接收子組件傳來的 item 名稱，切換最愛狀態
+  const handleFavoriteToggle = (itemName) => {
+    setFavoriteNames((prev) => {
+      // 如果已存在就移除，否則加入
+      if (prev.includes(itemName)) {
+        return prev.filter((name) => name !== itemName);
+      }
+      return [...prev, itemName];
+    });
+  };
+
   return (
     <div className="flex flex-col px-6 md:px-16 lg:px-24 xl:px-32">
       {/* 超稀有卡片區 */}
@@ -137,10 +152,47 @@ const Marketplace = () => {
           setFilters={setFilters}
         />
 
+        <div className="space-y-2 max-h-64 overflow-y-auto">
+          <h3 className="mb-4 text-sm font-semibold text-gray-700">
+            簡易計算費用
+          </h3>
+          {favoriteNames.map((name, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between px-4 py-3 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              <span className="text-sm text-gray-900 font-medium truncate">
+                {name}
+              </span>
+              <button
+                onClick={() =>
+                  setFavoriteNames((prev) => prev.filter((n) => n !== name))
+                }
+                className="text-gray-400 hover:text-gray-600 text-sm font-medium px-2 py-1 hover:bg-gray-100 rounded transition-colors"
+                title="移除"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+          {favoriteNames.length > 0 && (
+            <div className="pt-3 pt-4 border-t border-gray-200 sticky bottom-0 bg-white">
+              <div className="text-lg font-bold text-gray-900 flex justify-between items-center">
+                <span>總計:</span>
+                <span>NT${favoriteNames.reduce((sum, name) => sum + (parseInt(name) || 0), 0).toLocaleString()}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="flex-1 grid xl:grid-cols-2 gap-4">
           {/* 有認證過的帳號擺最前面 */}
           {sortedListings.map((listing, index) => (
-            <ListingCard listing={listing} key={index} />
+            <ListingCard
+              listing={listing}
+              onFavoriteToggle={handleFavoriteToggle}
+              key={index}
+            />
           ))}
         </div>
       </div>
