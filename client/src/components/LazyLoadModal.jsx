@@ -1,6 +1,7 @@
 import React, { useState, lazy, Suspense } from "react";
 
 const Modal = lazy(() => import("./Modal"));
+const TestModal = lazy(() => import("./TestModal"));
 
 export default function LazyLoadModal() {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +15,7 @@ export default function LazyLoadModal() {
     setTimeout(() => {
       setShowModal(true);
       setIsLoading(false);
-    }, 5000); // 5000ms = 5秒
+    }, 1000); // 5000ms = 5秒
   };
 
   return (
@@ -27,15 +28,18 @@ export default function LazyLoadModal() {
         {isLoading ? (
           <>
             <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-            準備召喚中...
+            招喚超大紅包...
           </>
         ) : (
-          "招喚拍賣場"
+          "招喚超大紅包"
         )}
       </button>
 
       <Suspense fallback={null}>
-        {showModal && <Modal onClose={() => setShowModal(false)} />}
+        {/* 這邊放拍賣場 */}
+        {/* {showModal && <Modal onClose={() => setShowModal(false)} />} */}
+        {/* 這邊招喚更新進度 */}
+        {showModal && <TestModal onClose={() => setShowModal(false)} />}
       </Suspense>
     </div>
   );
