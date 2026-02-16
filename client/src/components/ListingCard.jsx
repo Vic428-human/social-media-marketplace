@@ -9,14 +9,9 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const ListingCard = ({ listing, onFavoriteToggle }) => {
+const ListingCard = ({ listing }) => {
   const navigator = useNavigate();
   const currency = import.meta.env.VITE_CURRENCY || "$";
-
-  const handleFavoriteClick = (value) => {
-    // 點擊時傳 item 名稱回父組件
-    onFavoriteToggle(value);
-  };
 
   return (
     <div className="flex relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transaction">
@@ -103,14 +98,6 @@ const ListingCard = ({ listing, onFavoriteToggle }) => {
           >
             詳情
           </button>
-        </div>
-        {/* 我的最愛按鈕 */}
-        <div
-          className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all`}
-          onClick={()=> handleFavoriteClick(listing.price)}
-          title="加入/移除最愛"
-        >
-          +
         </div>
       </div>
     </div>
